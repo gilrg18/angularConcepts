@@ -1,4 +1,3 @@
-
 <h1>Welcome to {{ hotelName }}</h1>
 <div [hidden]="hideRooms">
   Number of rooms:
@@ -9,9 +8,33 @@
 <!-- document.getElementById('numberOfRooms').innerText = numberOfRooms; -->
 
 <!-- OPTIONAL CHAINING, NULLAGE COALLESCING show # of available rooms if they exist or show msg 'No rooms'-->
-{{rooms.availableRooms ?? 'No rooms'}} 
+{{ rooms.availableRooms ?? "No rooms" }}
 
-<div *ngIf="rooms?.availableRooms">Rooms List</div>
+<div *ngIf="rooms.availableRooms > 0">
+  Rooms List
+  <table>
+    <tr>
+      <th>Index</th>
+      <th>Even/Odd</th>
+      <th>Room Number</th>
+      <th>Type</th>
+      <th>Price</th>
+      <th>Amenities</th>
+      <th>Check-in Time</th>
+      <th>Check-out Time</th>
+    </tr>
+    <tr *ngFor="let room of roomList; let e = even; let o = odd; let i = index">
+      <td>{{ e ? "Even" : "Odd" }}</td>
+      <td>{{ i }}</td>
+      <td>{{ room.roomNumber.toString().padStart(6, "-").padEnd(11, "-") }}</td>
+      <td>{{ room.roomType }}</td>
+      <td>{{ room.price }}</td>
+      <td>{{ room.amenities }}</td>
+      <td>{{ room.checkinTime }}</td>
+      <td>{{ room.checkoutTime }}</td>
+    </tr>
+  </table>
+</div>
 
 <!-- EVENT BINDING -->
 <!-- (click) banana syntax -->
