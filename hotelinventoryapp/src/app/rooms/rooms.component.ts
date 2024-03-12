@@ -9,5 +9,7 @@ import { Component } from '@angular/core';
 })
 export class RoomsComponent {
   //INTERPOLATION
-  hotelName = 'RIU Hotel'
+  hotelName = 'RIU Hotel';
+  //PROPERTY BINDING
+  numberOfRooms = 100;
 }
