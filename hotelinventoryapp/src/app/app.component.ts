@@ -6,7 +6,8 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet],
   //templateUrl: './app.component.html',
-  template: '<h1>Hello World from inline template!</h1>',
+  template:  `<h1>Hello World from inline template!</h1>
+  <p>Angular is awesome</p>`,
   styleUrl: './app.component.css'
 })
 export class AppComponent {
