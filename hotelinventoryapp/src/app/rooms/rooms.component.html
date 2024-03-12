@@ -7,7 +7,12 @@
 </div>
 <!-- Same as: -->
 <!-- document.getElementById('numberOfRooms').innerText = numberOfRooms; -->
-<div *ngIf="rooms.availableRooms > 0">Rooms List</div>
+
+<!-- OPTIONAL CHAINING, NULLAGE COALLESCING show # of available rooms if they exist or show msg 'No rooms'-->
+{{rooms.availableRooms ?? 'No rooms'}} 
+
+<div *ngIf="rooms?.availableRooms">Rooms List</div>
+
 <!-- EVENT BINDING -->
 <!-- (click) banana syntax -->
 <button (click)="toggle()">Toggle</button>
