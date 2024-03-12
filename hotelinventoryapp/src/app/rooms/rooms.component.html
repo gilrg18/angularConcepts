@@ -1,3 +1,4 @@
+
 <h1>Welcome to {{ hotelName }}</h1>
 <div [hidden]="hideRooms">
   Number of rooms:
@@ -6,7 +7,7 @@
 </div>
 <!-- Same as: -->
 <!-- document.getElementById('numberOfRooms').innerText = numberOfRooms; -->
-
+<div *ngIf="rooms.availableRooms > 0">Rooms List</div>
 <!-- EVENT BINDING -->
 <!-- (click) banana syntax -->
 <button (click)="toggle()">Toggle</button>

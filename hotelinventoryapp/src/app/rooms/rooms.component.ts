@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
+import { Room } from './rooms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'hinv-rooms',
   standalone: true,
-  imports: [],
+  //CommonModule for *ngIf to work
+  imports: [CommonModule],
   templateUrl: './rooms.component.html',
-  styleUrl: './rooms.component.css'
+  styleUrl: './rooms.component.css',
 })
 export class RoomsComponent {
   //INTERPOLATION
@@ -15,8 +18,14 @@ export class RoomsComponent {
 
   //EVENT BINDING
   hideRooms = false;
-  toggle(){
+
+  rooms: Room = {
+    totalRooms: 20,
+    availableRooms: 10,
+    bookedRooms: 5,
+  };
+
+  toggle() {
     this.hideRooms = !this.hideRooms;
   }
-
 }
