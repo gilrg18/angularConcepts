@@ -5,10 +5,11 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet],
-  //templateUrl: './app.component.html',
-  template:  `<h1>Hello World from inline template!</h1>
-  <p>Angular is awesome</p>`,
-  styleUrl: './app.component.css'
+  templateUrl: './app.component.html',
+  // template:  `<h1>Hello World from inline template!</h1>
+  // <p>Angular is awesome</p>`,
+  styleUrl: './app.component.css',
+  styles: [`h1{color:red}`]
 })
 export class AppComponent {
   title = 'hotelinventoryapp';
