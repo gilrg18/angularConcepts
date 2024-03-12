@@ -12,4 +12,11 @@ export class RoomsComponent {
   hotelName = 'RIU Hotel';
   //PROPERTY BINDING
   numberOfRooms = 100;
+
+  //EVENT BINDING
+  hideRooms = false;
+  toggle(){
+    this.hideRooms = !this.hideRooms;
+  }
+
 }

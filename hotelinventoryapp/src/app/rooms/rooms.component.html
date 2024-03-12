@@ -1,6 +1,12 @@
-<h1>Welcome to {{hotelName}}</h1>
-
-Number of rooms: 
-<div [innerText]="numberOfRooms"></div>
+<h1>Welcome to {{ hotelName }}</h1>
+<div [hidden]="hideRooms">
+  Number of rooms:
+  <!-- [innerText] box syntax -->
+  <div [innerText]="numberOfRooms"></div>
+</div>
 <!-- Same as: -->
 <!-- document.getElementById('numberOfRooms').innerText = numberOfRooms; -->
+
+<!-- EVENT BINDING -->
+<!-- (click) banana syntax -->
+<button (click)="toggle()">Toggle</button>
