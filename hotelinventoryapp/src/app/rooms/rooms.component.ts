@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './rooms.component.css'
 })
 export class RoomsComponent {
-
+  //INTERPOLATION
+  hotelName = 'RIU Hotel'
 }
