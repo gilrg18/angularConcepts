@@ -1,0 +1,31 @@
+Rooms List
+<table class="table">
+    <tr>
+      <th>Even/Odd</th>
+      <th>Index</th>
+      <th>Room Number</th>
+      <th>Type</th>
+      <th>Price</th>
+      <th>Amenities</th>
+      <th>Check-in Time</th>
+      <th>Check-out Time</th>
+      <th>Rating</th>
+    </tr>
+    <!-- STRUCTURAL directives add or remove elements from DOM (*ngFor, ngIf, ngSwitch)-->
+    <!-- ATTRIBUTE directives modify the appearance or behavior of DOM elements 
+        but cannot add or remove element from the DOM -->
+    <tr [ngClass]="e ? 'even' : 'odd'" 
+        *ngFor="let room of rooms | slice : 0:3;  
+        let e = even; let o = odd; let i = index">
+      <td>{{ e ? "Even" : "Odd" }}</td>
+      <td>{{ i  | percent}}</td>
+      <td>{{ room.roomNumber.toString().padStart(6, "-").padEnd(11, "-") }}</td>
+      <td>{{ room.roomType }}</td>
+      <td>{{ room.price | currency: 'GBP' }}</td>
+      <td>{{ room.amenities | titlecase}}</td>
+      <!-- PIPES '|' (Format data, it doesnt change the original data,it just formats it) -->
+      <td>{{ room.checkinTime | date : 'dd/MMM/yyyy' }}</td>
+      <td>{{ room.checkoutTime | date : 'short' }}</td>
+      <td>{{room.rating | number : '1.1-1' : 'en-us'}}</td>
+    </tr>
+  </table>
