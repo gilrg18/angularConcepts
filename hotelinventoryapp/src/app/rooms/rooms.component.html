@@ -23,6 +23,9 @@
       <th>Check-in Time</th>
       <th>Check-out Time</th>
     </tr>
+    <!-- STRUCTURAL directives add or remove elements from DOM (*ngFor, ngIf, ngSwitch)-->
+    <!-- ATTRIBUTE directives modify the appearance or behavior of DOM elements 
+        but cannot add or remove element from the DOM -->
     <tr *ngFor="let room of roomList; let e = even; let o = odd; let i = index">
       <td>{{ e ? "Even" : "Odd" }}</td>
       <td>{{ i }}</td>

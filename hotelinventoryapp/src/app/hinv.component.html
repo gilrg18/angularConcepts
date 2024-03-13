@@ -1,2 +1,9 @@
 <h1>Hello Coppel!</h1>
-<hinv-rooms></hinv-rooms>
+
+<div [ngSwitch]="loginType">
+  <div *ngSwitchCase="'User'">Welcome User</div>
+  <div *ngSwitchCase="'Admin'">
+    <hinv-rooms></hinv-rooms>
+  </div>
+  <div *ngSwitchDefault>Unauthorized!</div>
+</div>
