@@ -21,18 +21,19 @@ export class RoomsComponent {
 
   rooms: Room = {
     totalRooms: 20,
-    availableRooms: 0,
+    availableRooms: 10,
     bookedRooms: 5,
   };
 
   roomList: RoomList[] = [{
     roomNumber: 3,
     roomType:'Deluxe',
-    amenities: 'Air conditioner, Bar',
+    amenities: 'Air conditioner, bar',
     price: 500,
     photos: 'asdasd.jpg',
     checkinTime: new Date('11-Nov-2023'),
-    checkoutTime: new Date()
+    checkoutTime: new Date(),
+    rating : 8.2123,
   },
   {
     roomNumber: 9,
@@ -41,16 +42,18 @@ export class RoomsComponent {
     price: 200,
     photos: 'asdasd.jpg',
     checkinTime: new Date('11-Nov-2023'),
-    checkoutTime: new Date()
+    checkoutTime: new Date(),
+    rating : 6.8321,
   },
   {
     roomNumber:1,
     roomType:'Pent House',
-    amenities: 'Air conditioner, Bar, HotTub',
+    amenities: 'Air conditioner, bar, hottub',
     price: 1000,
     photos: 'asdasd.jpg',
     checkinTime: new Date('11-Nov-2023'),
-    checkoutTime: new Date()
+    checkoutTime: new Date(),
+    rating : 10.0444,
   }]
 
   toggle() {
