@@ -7,6 +7,8 @@ import { RoomsListComponent } from './rooms-list/rooms-list.component';
   selector: 'hinv-rooms',
   standalone: true,
   //CommonModule for *ngIf to work
+  //Parent Component (Smart Component: from where to get the data): RoomsComponent
+  //Child Component (Dumb component: just render the data): RoomsListComponent
   imports: [CommonModule, RoomsListComponent],
   templateUrl: './rooms.component.html',
   styleUrl: './rooms.component.css',
