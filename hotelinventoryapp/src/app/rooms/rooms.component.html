@@ -2,7 +2,9 @@
 <div [hidden]="hideRooms">
   Number of rooms:
   <!-- [innerText] box syntax -->
-  <div [innerText]="numberOfRooms"></div>
+  <div [ngStyle]="{'background-color' : rooms.availableRooms ? 'green': 'red'}"
+    [innerText]="rooms.availableRooms">
+    </div>
 </div>
 <!-- Same as: -->
 <!-- document.getElementById('numberOfRooms').innerText = numberOfRooms; -->
