@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { Room, RoomList } from './rooms';
 import { CommonModule } from '@angular/common';
 import { RoomsListComponent } from './rooms-list/rooms-list.component';
@@ -13,7 +13,7 @@ import { RoomsListComponent } from './rooms-list/rooms-list.component';
   templateUrl: './rooms.component.html',
   styleUrl: './rooms.component.css',
 })
-export class RoomsComponent implements OnInit {
+export class RoomsComponent implements OnInit, DoCheck {
   //INTERPOLATION
   hotelName = 'copelinho';
   //PROPERTY BINDING
@@ -33,6 +33,11 @@ export class RoomsComponent implements OnInit {
   title = 'Room List';
 
   roomsList: RoomList[] = [];
+
+  //It will listen to ANY changes that happen in your ENTIRE application (very costly)
+  ngDoCheck(): void {
+    console.log('ngDoCheck: called on changes');
+  }
 
   toggle() {
     this.hideRooms = !this.hideRooms;

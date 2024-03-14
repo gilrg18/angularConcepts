@@ -30,11 +30,11 @@ export class RoomsListComponent implements OnInit, OnChanges {
   //ngOnChanges only works when you have Input properties and those properties get a new value
   ngOnChanges(changes: SimpleChanges): void {
     console.log('CHANGES: ', changes);
-    console.log(
-      'Access specific property roomType: ',
-      changes['rooms'].currentValue[changes['rooms'].currentValue.length - 1]
-        .roomType
-    );
+    // console.log(
+    //   'Access specific property roomType: ',
+    //   changes['rooms'].currentValue[changes['rooms'].currentValue.length - 1]
+    //     .roomType
+    // );
     if (changes['title']) {
       this.title = changes['title'].currentValue.toUpperCase();
     }
