@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
 import { RoomList } from '../rooms';
 import { CommonModule } from '@angular/common';
 @Component({
@@ -14,11 +14,16 @@ import { CommonModule } from '@angular/common';
 
 
 })
-export class RoomsListComponent implements OnInit{
+export class RoomsListComponent implements OnInit, OnChanges{
   //Decorator Input to receive data 
   //"Make this 'rooms' property a valid html property on 'hinv-rooms-list' html element"
   @Input() rooms: RoomList[] = [];
 
+  //You can only apply ngOnChange in components that have @Input property
+  //ngOnChanges only works when you have Input properties and those properties get a new value
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('CHANGES: ',changes);
+  }
   //Pass the data back from child to parent component
   //Outputs are events
   @Output() selectedRoom = new EventEmitter<RoomList>()
