@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { RoomList } from '../rooms';
 import { CommonModule } from '@angular/common';
 @Component({
@@ -6,7 +6,13 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './rooms-list.component.html',
-  styleUrl: './rooms-list.component.css'
+  styleUrl: './rooms-list.component.css',
+  //Change Detection and ngOnChanges
+  //onPush can be used in case im not modifying any internal data in this component
+  //In this case it changes data that comes from outside
+  changeDetection: ChangeDetectionStrategy.OnPush
+
+
 })
 export class RoomsListComponent implements OnInit{
   //Decorator Input to receive data 

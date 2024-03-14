@@ -17,12 +17,7 @@ Rooms List
         but cannot add or remove element from the DOM -->
   <tr
     [ngClass]="e ? 'even' : 'odd'"
-    *ngFor="
-      let room of rooms | slice : 0 : 3;
-      let e = even;
-      let o = odd;
-      let i = index
-    "
+    *ngFor="let room of rooms; let e = even; let o = odd; let i = index"
   >
     <td>{{ e ? "Even" : "Odd" }}</td>
     <td>{{ i | percent }}</td>
