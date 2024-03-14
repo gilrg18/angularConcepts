@@ -30,10 +30,13 @@ export class RoomsComponent implements OnInit {
     bookedRooms: 5,
   };
 
+  title = 'Room List';
+
   roomsList: RoomList[] = [];
 
   toggle() {
     this.hideRooms = !this.hideRooms;
+    this.title = 'Rooms List!';
   }
   /**
    * LIFECYCLE HOOKS

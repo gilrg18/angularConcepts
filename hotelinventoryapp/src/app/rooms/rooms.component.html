@@ -22,7 +22,7 @@
 </div>
 
 <div *ngIf="rooms.availableRooms > 0">
- <hinv-rooms-list [rooms]="roomsList"
+ <hinv-rooms-list [rooms]="roomsList" [title]="title"
  (selectedRoom) ="selectRoom($event)"></hinv-rooms-list>
 </div>
 
