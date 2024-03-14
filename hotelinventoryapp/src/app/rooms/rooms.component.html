@@ -13,9 +13,13 @@
 <!-- {{ rooms.availableRooms ?? 'No Rooms' }} -->
 <!-- JSON PIPE -->
 <!-- {{roomList | json}} -->
+<div *ngIf="selectedRoom">
+  {{selectedRoom | json}}
+</div>
 
 <div *ngIf="rooms.availableRooms > 0">
- <hinv-rooms-list [rooms]="roomsList"></hinv-rooms-list>
+ <hinv-rooms-list [rooms]="roomsList"
+ (selectedRoom) ="selectRoom($event)"></hinv-rooms-list>
 </div>
 
 <!-- EVENT BINDING -->

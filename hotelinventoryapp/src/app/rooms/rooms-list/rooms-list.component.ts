@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { RoomList } from '../rooms';
 import { CommonModule } from '@angular/common';
 @Component({
@@ -13,9 +13,17 @@ export class RoomsListComponent implements OnInit{
   //"Make this 'rooms' property a valid html property on 'hinv-rooms-list' html element"
   @Input() rooms: RoomList[] = [];
 
+  //Pass the data back from child to parent component
+  //Outputs are events
+  @Output() selectedRoom = new EventEmitter<RoomList>()
+
   constructor(){}
 
   ngOnInit(): void {
     
   }
+  selectRoom(room: RoomList) {
+    this.selectedRoom.emit(room);
+  }
 }
+

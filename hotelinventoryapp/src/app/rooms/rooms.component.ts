@@ -22,6 +22,8 @@ export class RoomsComponent implements OnInit {
   //EVENT BINDING
   hideRooms = false;
 
+  selectedRoom!: RoomList;
+
   rooms: Room = {
     totalRooms: 20,
     availableRooms: 10,
@@ -79,5 +81,10 @@ export class RoomsComponent implements OnInit {
         rating: 10.0444,
       },
     ];
+  }
+
+  selectRoom(room: RoomList){
+    this.selectedRoom = room;
+    console.log(room);
   }
 }
