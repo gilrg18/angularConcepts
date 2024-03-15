@@ -1,7 +1,8 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, OnInit, ViewChild } from '@angular/core';
 import { Room, RoomList } from './rooms';
 import { CommonModule } from '@angular/common';
 import { RoomsListComponent } from './rooms-list/rooms-list.component';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'hinv-rooms',
@@ -9,11 +10,11 @@ import { RoomsListComponent } from './rooms-list/rooms-list.component';
   //CommonModule for *ngIf to work
   //Parent Component (Smart Component: from where to get the data): RoomsComponent
   //Child Component (Dumb component: just render the data): RoomsListComponent
-  imports: [CommonModule, RoomsListComponent],
+  imports: [CommonModule, RoomsListComponent, HeaderComponent],
   templateUrl: './rooms.component.html',
   styleUrl: './rooms.component.css',
 })
-export class RoomsComponent implements OnInit, DoCheck {
+export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
   //INTERPOLATION
   hotelName = 'copelinho';
   //PROPERTY BINDING
@@ -33,6 +34,17 @@ export class RoomsComponent implements OnInit, DoCheck {
   title = 'Room List';
 
   roomsList: RoomList[] = [];
+
+  //ViewChild, ViewChildren and AfterViewInit
+  //With ViewChild we create a new instance of HeaderComponent inside RoomsComponent
+  //With static: true (default is false) you are telling the parent component(RoomsComponent) that it
+  //is safe to instance the child component(HeaderComponent) on the parents onInit.
+  //Default static: false because if a child component has async data, it wont be able
+  //to render on the parents component onInit which will cause errors, so if you are sure
+  //that the child component isnt waiting for responses data or something from an api, you can
+  //set static: true so it renders on the parents onInit
+
+  @ViewChild(HeaderComponent, {static: true}) headerComponent?: HeaderComponent;
 
   //It will listen to ANY changes that happen in your ENTIRE application (very costly)
   ngDoCheck(): void {
@@ -57,6 +69,7 @@ export class RoomsComponent implements OnInit, DoCheck {
   constructor() {}
 
   ngOnInit(): void {
+    console.log('headerComponent: ',this.headerComponent);
     this.roomsList = [
       {
         roomNumber: 3,
@@ -89,6 +102,10 @@ export class RoomsComponent implements OnInit, DoCheck {
         rating: 10.0444,
       },
     ];
+  }
+
+  ngAfterViewInit(): void {
+    console.log('headerComponent: ',this.headerComponent);
   }
 
   selectRoom(room: RoomList) {
