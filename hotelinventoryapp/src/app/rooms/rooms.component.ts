@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, DoCheck, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Room, RoomList } from './rooms';
 import { CommonModule } from '@angular/common';
 import { RoomsListComponent } from './rooms-list/rooms-list.component';
@@ -44,7 +44,10 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
   //that the child component isnt waiting for responses data or something from an api, you can
   //set static: true so it renders on the parents onInit
 
+  //ViewChild will only access the FIRST instance of headerComponent
+  //If you want to access all instances use ViewChildren
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
+  @ViewChildren(HeaderComponent) headerChildrenComponent!: QueryList<HeaderComponent>
 
   //It will listen to ANY changes that happen in your ENTIRE application (very costly)
   ngDoCheck(): void {
@@ -106,14 +109,20 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
 
   //In developer mode ull get NG0100 error, dont worry about it, worry if its in production mode
   ngAfterViewInit(): void {
-    // this.headerComponent.title = "Rooms View";
-    // console.log('headerComponent: ',this.headerComponent);
+    this.headerComponent.title = "First Title";
+    console.log('headerComponent: ',this.headerComponent);
+    this.headerChildrenComponent.last.title = 'Last Title'
+    for(let header of this.headerChildrenComponent['_results']){
+      header.title = 'lol';
+    }
+    console.log('headerChildrenComponent: ',this.headerChildrenComponent);
   }
 
   //At this point, angular has completed one lifecycle check already
   ngAfterViewChecked(){
-    this.headerComponent.title = "Rooms View";
-    console.log('headerComponent: ',this.headerComponent);
+    // this.headerComponent.title = "Rooms View";
+    // console.log('headerComponent: ',this.headerComponent);
+    // console.log('headerChildrenComponent: ',this.headerChildrenComponent);
   }
   selectRoom(room: RoomList) {
     this.selectedRoom = room;
