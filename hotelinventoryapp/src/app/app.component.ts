@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, ViewContainerRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { RoomsComponent } from "./rooms/rooms.component";
 import { CommonModule } from '@angular/common';
@@ -12,8 +12,18 @@ import { CommonModule } from '@angular/common';
     styleUrl: './app.component.css',
     imports: [RouterOutlet, RoomsComponent, CommonModule]
 })
-export class AppComponent {
+
+//when we use ViewChild, the static property is false, so we need to use AfterViewInit
+//so the parent renders before the child
+export class AppComponent implements AfterViewInit{
   title = 'hotelinventoryapp';
 
   loginType = 'Admin'
+
+  @ViewChild('user',{ read: ViewContainerRef} ) vcr!: ViewContainerRef;
+
+  ngAfterViewInit(): void {
+    const componentRef = this.vcr.createComponent(RoomsComponent)
+    componentRef.instance.numberOfRooms = 50;
+  }
 }

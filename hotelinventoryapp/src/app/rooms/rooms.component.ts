@@ -44,7 +44,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
   //that the child component isnt waiting for responses data or something from an api, you can
   //set static: true so it renders on the parents onInit
 
-  @ViewChild(HeaderComponent, {static: true}) headerComponent?: HeaderComponent;
+  @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
 
   //It will listen to ANY changes that happen in your ENTIRE application (very costly)
   ngDoCheck(): void {
@@ -104,10 +104,17 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
     ];
   }
 
+  //In developer mode ull get NG0100 error, dont worry about it, worry if its in production mode
   ngAfterViewInit(): void {
-    console.log('headerComponent: ',this.headerComponent);
+    // this.headerComponent.title = "Rooms View";
+    // console.log('headerComponent: ',this.headerComponent);
   }
 
+  //At this point, angular has completed one lifecycle check already
+  ngAfterViewChecked(){
+    this.headerComponent.title = "Rooms View";
+    console.log('headerComponent: ',this.headerComponent);
+  }
   selectRoom(room: RoomList) {
     this.selectedRoom = room;
     console.log(room);
