@@ -17,6 +17,8 @@ export class ContainerComponent implements AfterContentInit {
 
   ngAfterContentInit(): void {
     console.log('Employee: ',this.employee);
+    //Using ContentChild to access a component
+    //The prefered way is using input and output 
     this.employee.empName = 'EmployeeMike';
   }
 }
