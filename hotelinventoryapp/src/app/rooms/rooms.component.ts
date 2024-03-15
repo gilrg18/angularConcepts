@@ -150,3 +150,5 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
 
 
 }
+
+//Split the code into services, try to keep your components as simple (less lines of code) as possible

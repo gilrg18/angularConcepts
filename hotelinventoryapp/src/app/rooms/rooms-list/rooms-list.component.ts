@@ -59,3 +59,9 @@ export class RoomsListComponent implements OnInit, OnChanges, OnDestroy {
     console.log('DESTROYED');
   }
 }
+
+//Dependencies are a service or objects needed by classes to perform some function.
+//Its a design pattern.
+//Angular has built-in Dependency Injection support.
+//This makes angular what it is.
+//Class based providers, Value providers, Factory.
