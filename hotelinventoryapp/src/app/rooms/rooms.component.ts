@@ -3,6 +3,7 @@ import { Room, RoomList } from './rooms';
 import { CommonModule } from '@angular/common';
 import { RoomsListComponent } from './rooms-list/rooms-list.component';
 import { HeaderComponent } from '../header/header.component';
+import { RoomsService } from './services/rooms.service';
 
 @Component({
   selector: 'hinv-rooms',
@@ -32,6 +33,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
   };
 
   title = 'Room List';
+
 
   roomsList: RoomList[] = [];
 
@@ -69,42 +71,17 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
    * ngOnDestroy
    */
 
-  constructor() {}
+  //Dependency Injection - you should NOT create an instance directly
+  //roomService = new RoomService(); NOT LIKE THIS
+  //You should not access your services directly from a template(html), considered antipattern
+  //Use private to limit this particular service to the typescript file 
+  constructor(private roomService: RoomsService) {}
 
   ngOnInit(): void {
     console.log('headerComponent: ',this.headerComponent);
-    this.roomsList = [
-      {
-        roomNumber: 3,
-        roomType: 'Deluxe',
-        amenities: 'Air conditioner, bar',
-        price: 500,
-        photos: 'asdasd.jpg',
-        checkinTime: new Date('11-Nov-2023'),
-        checkoutTime: new Date(),
-        rating: 8.2123,
-      },
-      {
-        roomNumber: 9,
-        roomType: 'Normal',
-        amenities: 'Nothing lol',
-        price: 200,
-        photos: 'asdasd.jpg',
-        checkinTime: new Date('11-Nov-2023'),
-        checkoutTime: new Date(),
-        rating: 6.8321,
-      },
-      {
-        roomNumber: 1,
-        roomType: 'Pent House',
-        amenities: 'Air conditioner, bar, hottub',
-        price: 1000,
-        photos: 'asdasd.jpg',
-        checkinTime: new Date('11-Nov-2023'),
-        checkoutTime: new Date(),
-        rating: 10.0444,
-      },
-    ];
+    //In real world we will be retrieving this data from a service that has an api call 
+    //For now its just hardcoded data in the rooms service
+    this.roomsList = this.roomService.getRooms();
   }
 
   //In developer mode ull get NG0100 error, dont worry about it, worry if its in production mode
