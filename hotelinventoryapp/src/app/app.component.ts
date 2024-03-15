@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { RoomsComponent } from "./rooms/rooms.component";
 import { CommonModule } from '@angular/common';
 import { ContainerComponent } from './container/container.component';
+import { EmployeeComponent } from './employee/employee.component';
 
 @Component({
     selector: 'hinv-root',
@@ -11,7 +12,7 @@ import { ContainerComponent } from './container/container.component';
     // template:  `<h1>Hello World from inline template!</h1>
     // <p>Angular is awesome</p>`,
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, RoomsComponent, CommonModule, ContainerComponent]
+    imports: [RouterOutlet, RoomsComponent, CommonModule, ContainerComponent, EmployeeComponent]
 })
 
 //when we use ViewChild, the static property is false, so we need to use AfterViewInit

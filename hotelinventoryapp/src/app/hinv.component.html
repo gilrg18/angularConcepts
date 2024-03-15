@@ -1,7 +1,8 @@
-<hinv-rooms>
-  <h1>This doesnt show because its not from a component with ng-content</h1>
-</hinv-rooms>
+<!-- The content is something that will be provided by the parent component (appcomponent)
+in this case the container component (ng)content is hinv-rooms hinv-employee h1-->
 <hinv-container>
+  <hinv-rooms></hinv-rooms>
+  <hinv-employee></hinv-employee>
   <h1>This is from ng-content</h1>
 </hinv-container>
 <div #name>
