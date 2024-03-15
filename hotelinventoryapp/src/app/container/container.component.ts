@@ -21,4 +21,6 @@ export class ContainerComponent implements AfterContentInit {
     //The prefered way is using input and output 
     this.employee.empName = 'EmployeeMike';
   }
+
+  //NGAFTERCONTENTCHECK - whenever somethings need to be done after a change action has executed (rarely used)
 }
