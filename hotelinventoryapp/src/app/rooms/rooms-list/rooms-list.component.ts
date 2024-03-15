@@ -7,6 +7,7 @@ import {
   ChangeDetectionStrategy,
   OnChanges,
   SimpleChanges,
+  OnDestroy,
 } from '@angular/core';
 import { RoomList } from '../rooms';
 import { CommonModule } from '@angular/common';
@@ -21,7 +22,7 @@ import { CommonModule } from '@angular/common';
   //In this case it changes data that comes from outside
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RoomsListComponent implements OnInit, OnChanges {
+export class RoomsListComponent implements OnInit, OnChanges, OnDestroy {
   //Decorator Input to receive data
   //"Make this 'rooms' property a valid html property on 'hinv-rooms-list' html element"
   @Input() rooms: RoomList[] = [];
@@ -48,5 +49,13 @@ export class RoomsListComponent implements OnInit, OnChanges {
   ngOnInit(): void {}
   selectRoom(room: RoomList) {
     this.selectedRoom.emit(room);
+  }
+
+  //When our component is destroyed, trigger something
+  //Useful when having memory consuming code and you want to free some memory
+  //For example you want to remove something from localStorage/sessionStorage
+  //Most of the time this hook will be used to unsubscribe for data  (topic to be seen)
+  ngOnDestroy(): void {
+    console.log('DESTROYED');
   }
 }

@@ -124,6 +124,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
     // console.log('headerComponent: ',this.headerComponent);
     // console.log('headerChildrenComponent: ',this.headerChildrenComponent);
   }
+
   selectRoom(room: RoomList) {
     this.selectedRoom = room;
     console.log(room);
@@ -146,4 +147,6 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
     //this.roomsList.push(room); //we should NOT do this
     this.roomsList = [...this.roomsList, room];
   }
+
+
 }
