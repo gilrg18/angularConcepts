@@ -6,7 +6,9 @@ import { RoomsService } from '../rooms/services/rooms.service';
   standalone: true,
   imports: [],
   templateUrl: './employee.component.html',
-  styleUrl: './employee.component.css'
+  styleUrl: './employee.component.css',
+  //This creates a 'local instance' of RoomsService, so RoomsService initializes twice
+  providers: [RoomsService]
 })
 export class EmployeeComponent{
 

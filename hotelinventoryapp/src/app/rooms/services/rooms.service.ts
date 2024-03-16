@@ -4,6 +4,7 @@ import { RoomList } from '../rooms';
   //This will take care of registering your service to your apps root module
   //Youre getting a SINGLE instance of your service, no matter how many times
   //you call it in #x components, the services is just instanced once (singleton)
+  //This creates a 'global instance' of RoomsService
   providedIn: 'root',
 })
 //What is a service? a reusable class where you can put some business logic
