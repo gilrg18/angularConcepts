@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
 import { RoomList } from '../rooms';
 @Injectable({
+  //This will take care of registering your service to your apps root module
+  //Youre getting a SINGLE instance of your service, no matter how many times
+  //you call it in #x components, the services is just instanced once (singleton)
   providedIn: 'root',
 })
+//What is a service? a reusable class where you can put some business logic
+//and access it inside your components
 export class RoomsService {
 
   roomsList: RoomList[] = [
@@ -38,7 +43,9 @@ export class RoomsService {
     },
   ];
 
-  constructor() {}
+  constructor() {
+    console.log('Rooms Service Initialized');
+  }
 
   getRooms() {
     return this.roomsList;

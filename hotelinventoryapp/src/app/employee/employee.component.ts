@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RoomsService } from '../rooms/services/rooms.service';
 
 @Component({
   selector: 'hinv-employee',
@@ -7,8 +8,13 @@ import { Component } from '@angular/core';
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.css'
 })
-export class EmployeeComponent {
+export class EmployeeComponent{
 
   empName: string = 'EmployeeGil';
+
+  constructor(private roomService: RoomsService) {
+
+  }
+
 
 }
