@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, DoCheck, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, OnInit, QueryList, SkipSelf, ViewChild, ViewChildren } from '@angular/core';
 import { Room, RoomList } from './rooms';
 import { CommonModule } from '@angular/common';
 import { RoomsListComponent } from './rooms-list/rooms-list.component';
@@ -75,7 +75,13 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
   //roomService = new RoomService(); NOT LIKE THIS
   //You should not access your services directly from a template(html), considered antipattern
   //Use private to limit this particular service to the typescript file 
-  constructor(private roomService: RoomsService) {}
+
+  //RESOLUTION MODIFIERS - SkipSelf - skips the check from the entire 
+  //dependency resolution tree for this particular component.
+  //Using this decorator causes Angular to look for dependencies in the parent component or beyond.
+  //Angular already uses a filter to figure out where the service instances are
+  //available which is pretty fast so it might be not necessary to use skipself
+  constructor(@SkipSelf() private roomService: RoomsService) {}
 
   ngOnInit(): void {
     console.log('headerComponent: ',this.headerComponent);

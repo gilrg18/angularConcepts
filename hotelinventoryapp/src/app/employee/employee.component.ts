@@ -18,9 +18,9 @@ export class EmployeeComponent implements OnInit {
   //@Self decorator tells angular this service (RoomsService) will only be available
   //at this particular level, so it wont look anywhere else for the service therefore
   //it is necesary to add RoomsService to the providers array.
-  constructor(@Self() private roomService: RoomsService) {
+  // constructor(@Self() private roomService: RoomsService) {
 
-  }
+  // }
 
   ngOnInit(): void {
 
