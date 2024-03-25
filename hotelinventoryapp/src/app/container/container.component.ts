@@ -1,12 +1,14 @@
-import { AfterContentInit, Component, ContentChild, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, ContentChild, Host } from '@angular/core';
 import { EmployeeComponent } from '../employee/employee.component';
+import { RoomsService } from '../rooms/services/rooms.service';
 
 @Component({
   selector: 'hinv-container',
   standalone: true,
   imports: [],
   templateUrl: './container.component.html',
-  styleUrl: './container.component.css'
+  styleUrl: './container.component.css',
+  providers: [RoomsService]
 })
 export class ContainerComponent implements AfterContentInit {
 
@@ -14,6 +16,12 @@ export class ContainerComponent implements AfterContentInit {
 
   //ContentChild has no option of calling static: true;
   @ContentChild(EmployeeComponent) employee!: EmployeeComponent;
+
+  //RESOLUTION MODIFIERS - HOST
+  //All the components loaded inside this container will use this instance of RoomsService
+  constructor(@Host() private roomsService: RoomsService){
+
+  }
 
   ngAfterContentInit(): void {
     console.log('Employee: ',this.employee);
