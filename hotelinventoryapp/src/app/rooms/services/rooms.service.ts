@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { RoomList } from '../rooms';
-import { environment } from '../../../environments/environment';
+import { APP_SERVICE_CONFIG } from '../../AppConfig/appconfig.service';
+import { AppConfig } from '../../AppConfig/appconfig.interface';
 //This API url will be used in multiple services so it has to be imported everywhere,
 //VALUE PROVIDERS help resolve this issue.
 @Injectable({
@@ -47,8 +48,8 @@ export class RoomsService {
     },
   ];
 
-  constructor() {
-    console.log('environment: ', environment.apiEndpont);
+  constructor(@Inject(APP_SERVICE_CONFIG) private config: AppConfig) {
+    console.log('Api Endpoint: ',this.config.apiEndpoint);
     console.log('Rooms Service Initialized');
   }
 
