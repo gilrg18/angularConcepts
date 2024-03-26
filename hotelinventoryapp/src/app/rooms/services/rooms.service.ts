@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { RoomList } from '../rooms';
+import { environment } from '../../../environments/environment';
+//This API url will be used in multiple services so it has to be imported everywhere,
+//VALUE PROVIDERS help resolve this issue.
 @Injectable({
   //This will take care of registering your service to your apps root module
   //Youre getting a SINGLE instance of your service, no matter how many times
@@ -45,6 +48,7 @@ export class RoomsService {
   ];
 
   constructor() {
+    console.log('environment: ', environment.apiEndpont);
     console.log('Rooms Service Initialized');
   }
 
