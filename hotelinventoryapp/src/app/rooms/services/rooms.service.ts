@@ -48,6 +48,7 @@ export class RoomsService {
     console.log('Rooms Service Initialized');
   }
 
+  //VALUE PROVIDERS
   getRooms() {
     return this.roomsList;
   }

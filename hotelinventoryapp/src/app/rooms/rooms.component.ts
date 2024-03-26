@@ -96,7 +96,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
     console.log('headerComponent: ',this.headerComponent);
     this.headerChildrenComponent.last.title = 'Last Title'
     for(let header of this.headerChildrenComponent['_results']){
-      header.title = 'lol';
+      header.title = 'gg wp';
     }
     console.log('headerChildrenComponent: ',this.headerChildrenComponent);
   }
