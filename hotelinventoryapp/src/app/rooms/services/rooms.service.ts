@@ -2,8 +2,8 @@ import { Inject, Injectable } from '@angular/core';
 import { RoomList } from '../rooms';
 import { APP_SERVICE_CONFIG } from '../../AppConfig/appconfig.service';
 import { AppConfig } from '../../AppConfig/appconfig.interface';
-//This API url will be used in multiple services so it has to be imported everywhere,
-//VALUE PROVIDERS help resolve this issue.
+//First use case: This API url will be used in multiple services so it has to be imported everywhere,
+//VALUE PROVIDERS help resolve this use case.
 @Injectable({
   //This will take care of registering your service to your apps root module
   //Youre getting a SINGLE instance of your service, no matter how many times
