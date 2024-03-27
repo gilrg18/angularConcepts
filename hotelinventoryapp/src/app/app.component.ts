@@ -6,6 +6,7 @@ import { ContainerComponent } from './container/container.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { LoggerService } from './logger/logger.service';
 import { LocalStorageToken } from './localstorage.token';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
     selector: 'hinv-root',
@@ -14,7 +15,8 @@ import { LocalStorageToken } from './localstorage.token';
     // template:  `<h1>Hello World from inline template!</h1>
     // <p>Angular is awesome</p>`,
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, RoomsComponent, CommonModule, ContainerComponent, EmployeeComponent]
+    imports: [RouterOutlet, RoomsComponent, CommonModule, ContainerComponent, EmployeeComponent
+    ,HttpClientModule]
 })
 
 //when we use ViewChild, the static property is false, so we need to use AfterViewInit
