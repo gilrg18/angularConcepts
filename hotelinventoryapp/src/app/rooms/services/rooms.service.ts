@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { RoomList } from '../rooms';
 import { APP_SERVICE_CONFIG } from '../../AppConfig/appconfig.service';
 import { AppConfig } from '../../AppConfig/appconfig.interface';
+import { HttpClient } from '@angular/common/http';
 //First use case: This API url will be used in multiple services so it has to be imported everywhere,
 //VALUE PROVIDERS help resolve this use case.
 @Injectable({
@@ -16,45 +17,19 @@ import { AppConfig } from '../../AppConfig/appconfig.interface';
 export class RoomsService {
 
   roomsList: RoomList[] = [
-    {
-      roomNumber: 3,
-      roomType: 'Deluxe',
-      amenities: 'Air conditioner, bar',
-      price: 500,
-      photos: 'asdasd.jpg',
-      checkinTime: new Date('11-Nov-2023'),
-      checkoutTime: new Date(),
-      rating: 8.2123,
-    },
-    {
-      roomNumber: 9,
-      roomType: 'Normal',
-      amenities: 'Nothing lol',
-      price: 200,
-      photos: 'asdasd.jpg',
-      checkinTime: new Date('11-Nov-2023'),
-      checkoutTime: new Date(),
-      rating: 6.8321,
-    },
-    {
-      roomNumber: 1,
-      roomType: 'Pent House',
-      amenities: 'Air conditioner, bar, hottub',
-      price: 1000,
-      photos: 'asdasd.jpg',
-      checkinTime: new Date('11-Nov-2023'),
-      checkoutTime: new Date(),
-      rating: 10.0444,
-    },
   ];
 
-  constructor(@Inject(APP_SERVICE_CONFIG) private config: AppConfig) {
+  constructor(@Inject(APP_SERVICE_CONFIG) private config: AppConfig, 
+  private http: HttpClient) {
+    //USING HTTPCLIENT to make our first api call.
     console.log('Api Endpoint: ',this.config.apiEndpoint);
     console.log('Rooms Service Initialized');
   }
 
   //VALUE PROVIDERS
   getRooms() {
-    return this.roomsList;
+    //since we have a proxy configured with "http://localhost:3000" we dont need to call 
+    //"http://localhost:3000" sinde the url
+    return this.http.get('/api/rooms');
   }
 }

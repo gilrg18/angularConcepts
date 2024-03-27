@@ -87,7 +87,11 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
     console.log('headerComponent: ',this.headerComponent);
     //In real world we will be retrieving this data from a service that has an api call 
     //For now its just hardcoded data in the rooms service
-    this.roomsList = this.roomService.getRooms();
+    //this.roomsList = this.roomService.getRooms();
+    //Angular uses a library called RXJS internally to work with streams of data
+    //and is also used inside your http service 
+    //As a developer you should SUBSCRIBE to the stream to get the data
+    console.log(this.roomService.getRooms());
   }
 
   //In developer mode ull get NG0100 error, dont worry about it, worry if its in production mode
@@ -115,7 +119,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
 
   addRoom() {
     const room: RoomList = {
-      roomNumber: 4,
+      roomNumber: '4',
       roomType: 'Solo',
       amenities: 'Air conditioner, bar, hottub',
       price: 499,
@@ -135,3 +139,10 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
 }
 
 //Split the code into services, try to keep your components as simple (less lines of code) as possible
+
+
+//RXJS works with PUSH Architecture
+//getData -> continous stream of data -> addData
+//Whenever the stream is updated Whoever is subscribed to it will get the data
+
+//You dont have to call the getData function again, thats PULL based architecture
