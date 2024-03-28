@@ -31,6 +31,6 @@ export class RoomsService {
   getRooms() {
     //since we have a proxy configured with "http://localhost:3000" we dont need to call 
     //"http://localhost:3000" sinde the url <- proxy didnt work lol so added manually now we have CORS issue
-    return this.http.get<RoomList[]>('localhost:3000/api/rooms');
+    return this.http.get<RoomList[]>('http://localhost:3000/api/rooms');
   }
 }
