@@ -23,13 +23,14 @@ export class RoomsService {
   private http: HttpClient) {
     //USING HTTPCLIENT to make our first api call.
     console.log('Api Endpoint: ',this.config.apiEndpoint);
+    console.log('Api Endpoint: ',this.http)
     console.log('Rooms Service Initialized');
   }
 
   //VALUE PROVIDERS
   getRooms() {
     //since we have a proxy configured with "http://localhost:3000" we dont need to call 
-    //"http://localhost:3000" sinde the url
-    return this.http.get('/api/rooms');
+    //"http://localhost:3000" sinde the url <- proxy didnt work lol so added manually now we have CORS issue
+    return this.http.get<RoomList[]>('localhost:3000/api/rooms');
   }
 }

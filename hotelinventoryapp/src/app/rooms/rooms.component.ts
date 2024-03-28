@@ -1,4 +1,13 @@
-import { AfterViewInit, Component, DoCheck, OnInit, QueryList, SkipSelf, ViewChild, ViewChildren } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  DoCheck,
+  OnInit,
+  QueryList,
+  SkipSelf,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 import { Room, RoomList } from './rooms';
 import { CommonModule } from '@angular/common';
 import { RoomsListComponent } from './rooms-list/rooms-list.component';
@@ -34,7 +43,6 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
 
   title = 'Room List';
 
-
   roomsList: RoomList[] = [];
 
   //ViewChild, ViewChildren and AfterViewInit
@@ -49,7 +57,8 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
   //ViewChild will only access the FIRST instance of headerComponent
   //If you want to access all instances use ViewChildren
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
-  @ViewChildren(HeaderComponent) headerChildrenComponent!: QueryList<HeaderComponent>
+  @ViewChildren(HeaderComponent)
+  headerChildrenComponent!: QueryList<HeaderComponent>;
 
   //It will listen to ANY changes that happen in your ENTIRE application (very costly)
   ngDoCheck(): void {
@@ -74,9 +83,9 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
   //Dependency Injection - you should NOT create an instance directly
   //roomService = new RoomService(); NOT LIKE THIS
   //You should not access your services directly from a template(html), considered antipattern
-  //Use private to limit this particular service to the typescript file 
+  //Use private to limit this particular service to the typescript file
 
-  //RESOLUTION MODIFIERS - SkipSelf - skips the check from the entire 
+  //RESOLUTION MODIFIERS - SkipSelf - skips the check from the entire
   //dependency resolution tree for this particular component.
   //Using this decorator causes Angular to look for dependencies in the parent component or beyond.
   //Angular already uses a filter to figure out where the service instances are
@@ -84,29 +93,32 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
   constructor(@SkipSelf() private roomService: RoomsService) {}
 
   ngOnInit(): void {
-    console.log('headerComponent: ',this.headerComponent);
-    //In real world we will be retrieving this data from a service that has an api call 
+    console.log('headerComponent: ', this.headerComponent);
+    //In real world we will be retrieving this data from a service that has an api call
     //For now its just hardcoded data in the rooms service
     //this.roomsList = this.roomService.getRooms();
     //Angular uses a library called RXJS internally to work with streams of data
-    //and is also used inside your http service 
+    //and is also used inside your http service
     //As a developer you should SUBSCRIBE to the stream to get the data
-    console.log(this.roomService.getRooms());
+    //If i wanna get the data from roomsService.getRooms() i need to subscribe to that stream
+    this.roomService.getRooms().subscribe((rooms) => {
+      this.roomsList = rooms;
+    });
   }
 
   //In developer mode ull get NG0100 error, dont worry about it, worry if its in production mode
   ngAfterViewInit(): void {
-    this.headerComponent.title = "First Title";
-    console.log('headerComponent: ',this.headerComponent);
-    this.headerChildrenComponent.last.title = 'Last Title'
-    for(let header of this.headerChildrenComponent['_results']){
+    this.headerComponent.title = 'First Title';
+    console.log('headerComponent: ', this.headerComponent);
+    this.headerChildrenComponent.last.title = 'Last Title';
+    for (let header of this.headerChildrenComponent['_results']) {
       header.title = 'gg wp';
     }
-    console.log('headerChildrenComponent: ',this.headerChildrenComponent);
+    console.log('headerChildrenComponent: ', this.headerChildrenComponent);
   }
 
   //At this point, angular has completed one lifecycle check already
-  ngAfterViewChecked(){
+  ngAfterViewChecked() {
     // this.headerComponent.title = "Rooms View";
     // console.log('headerComponent: ',this.headerComponent);
     // console.log('headerChildrenComponent: ',this.headerChildrenComponent);
@@ -134,12 +146,9 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
     //this.roomsList.push(room); //we should NOT do this
     this.roomsList = [...this.roomsList, room];
   }
-
-
 }
 
 //Split the code into services, try to keep your components as simple (less lines of code) as possible
-
 
 //RXJS works with PUSH Architecture
 //getData -> continous stream of data -> addData
