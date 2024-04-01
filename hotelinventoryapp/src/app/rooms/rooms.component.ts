@@ -47,15 +47,15 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
   roomsList: RoomList[] = [];
 
   //Creating an Observable by using RxJS, not http
-  stream = new Observable(observer=>{
+  stream = new Observable((observer) => {
     //Everytime u call next() on your observer it will be emitting new data,
     //whoever is subscribed to this stream will get this data.
     observer.next('user1');
     observer.next('user2');
     observer.next('user3');
     //This is where my stream completes/is done
-    observer.complete()
-  })
+    observer.complete();
+  });
 
   //ViewChild, ViewChildren and AfterViewInit
   //With ViewChild we create a new instance of HeaderComponent inside RoomsComponent
@@ -117,9 +117,14 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
       this.roomsList = rooms;
     });
 
-    this.stream.subscribe((data)=>console.log(data));
-    this.stream.subscribe((data)=>console.log(data));
-
+    //If a value changes or is pushed in a database, the observer that is subscribed to the stream (Observable),
+    //will receive that change or new value using the next() method
+    this.stream.subscribe({ 
+    next: (value) => console.log(value) ,
+    complete: () => console.log(console.log('Stream completed')),
+    error:  (err) => console.log(err),
+  });
+    this.stream.subscribe((data) => console.log(data));
   }
 
   //In developer mode ull get NG0100 error, dont worry about it, worry if its in production mode
