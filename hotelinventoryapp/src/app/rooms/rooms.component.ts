@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { RoomsListComponent } from './rooms-list/rooms-list.component';
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'hinv-rooms',
@@ -44,6 +45,17 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
   title = 'Room List';
 
   roomsList: RoomList[] = [];
+
+  //Creating an Observable by using RxJS, not http
+  stream = new Observable(observer=>{
+    //Everytime u call next() on your observer it will be emitting new data,
+    //whoever is subscribed to this stream will get this data.
+    observer.next('user1');
+    observer.next('user2');
+    observer.next('user3');
+    //This is where my stream completes/is done
+    observer.complete()
+  })
 
   //ViewChild, ViewChildren and AfterViewInit
   //With ViewChild we create a new instance of HeaderComponent inside RoomsComponent
@@ -104,6 +116,10 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
     this.roomService.getRooms().subscribe((rooms) => {
       this.roomsList = rooms;
     });
+
+    this.stream.subscribe((data)=>console.log(data));
+    this.stream.subscribe((data)=>console.log(data));
+
   }
 
   //In developer mode ull get NG0100 error, dont worry about it, worry if its in production mode
