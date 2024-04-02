@@ -3,6 +3,7 @@ import { RoomList } from '../rooms';
 import { APP_SERVICE_CONFIG } from '../../AppConfig/appconfig.service';
 import { AppConfig } from '../../AppConfig/appconfig.interface';
 import { HttpClient, HttpRequest } from '@angular/common/http';
+import { shareReplay } from 'rxjs';
 //First use case: This API url will be used in multiple services so it has to be imported everywhere,
 //VALUE PROVIDERS help resolve this use case.
 @Injectable({
@@ -18,6 +19,16 @@ export class RoomsService {
 
   roomsList: RoomList[] = [
   ];
+
+  //ShareReplay RxJs Operators
+  //We cannot modify the stream after we subscribe to it
+  //A stream can be modified inside a function called pipe()
+  //The $ syntax is to know this variable is a stream
+  getRooms$ = this.http.get<RoomList[]>('http://localhost:3000/api/rooms').pipe(
+    //Now we have the data available multiple times because we are caching the first request
+    //so we dont have to make unnecesary multiple calls.
+    shareReplay(1)
+  );
 
   constructor(@Inject(APP_SERVICE_CONFIG) private config: AppConfig, 
   private http: HttpClient) {

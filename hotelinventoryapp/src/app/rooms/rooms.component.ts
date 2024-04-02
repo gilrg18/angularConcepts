@@ -116,7 +116,8 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
     //and is also used inside your http service
     //As a developer you should SUBSCRIBE to the stream to get the data
     //If i wanna get the data from roomsService.getRooms() i need to subscribe to that stream
-    this.roomService.getRooms().subscribe((rooms) => {
+    //We call the stream getRooms$ and know we are making the rooms call in Network tab only once and not twice
+    this.roomService.getRooms$.subscribe((rooms) => {
       this.roomsList = rooms;
     });
 

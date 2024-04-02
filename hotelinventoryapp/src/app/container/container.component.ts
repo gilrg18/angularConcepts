@@ -8,7 +8,7 @@ import { RoomsService } from '../rooms/services/rooms.service';
   imports: [],
   templateUrl: './container.component.html',
   styleUrl: './container.component.css',
-  providers: [RoomsService]
+  //providers: [RoomsService]
 })
 export class ContainerComponent implements AfterContentInit {
 
@@ -19,7 +19,7 @@ export class ContainerComponent implements AfterContentInit {
 
   //RESOLUTION MODIFIERS - HOST
   //All the components loaded inside this container will use this instance of RoomsService
-  constructor(@Host() private roomsService: RoomsService){
+  constructor(){
 
   }
 

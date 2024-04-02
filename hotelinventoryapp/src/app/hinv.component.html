@@ -7,6 +7,15 @@ in this case the container component (ng)content is hinv-rooms hinv-employee h1-
 </hinv-container>
 <div #name>
 </div>
+<!-- We are duplicating the code so it makes two api calls to obtain the same data
+but if its the same data we want to avoid the second api call this is where 
+ShareReplay RxJs Operators come in handy -->
+<hinv-container>
+  <hinv-rooms></hinv-rooms>
+  <hinv-employee></hinv-employee>
+  <h1>This is from ng-content</h1>
+</hinv-container>
+
 <!-- <div [ngSwitch]="loginType">
   <div *ngSwitchCase="'User'">Welcome User</div>
   <div *ngSwitchCase="'Admin'">
