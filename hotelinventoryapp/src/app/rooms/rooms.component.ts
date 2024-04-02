@@ -119,11 +119,11 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
 
     //If a value changes or is pushed in a database, the observer that is subscribed to the stream (Observable),
     //will receive that change or new value using the next() method
-    this.stream.subscribe({ 
-    next: (value) => console.log(value) ,
-    complete: () => console.log(console.log('Stream completed')),
-    error:  (err) => console.log(err),
-  });
+    this.stream.subscribe({
+      next: (value) => console.log(value),
+      complete: () => console.log(console.log('Stream completed')),
+      error: (err) => console.log(err),
+    });
     this.stream.subscribe((data) => console.log(data));
   }
 
@@ -170,13 +170,13 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
     //this.roomsList = [...this.roomsList, room];
 
     //Calling Http Put request
-    this.roomService.addRoom(room).subscribe((data)=>{
+    this.roomService.addRoom(room).subscribe((data) => {
       this.roomsList = data;
-    })
+    });
   }
 
   //Http put (edit a room)
-  editRoom(){
+  editRoom() {
     const room: RoomList = {
       roomNumber: '3',
       roomType: 'EditedRoom',
@@ -188,9 +188,16 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
       rating: 9.115,
     };
 
-    this.roomService.editRoom(room).subscribe((data)=>{
+    this.roomService.editRoom(room).subscribe((data) => {
       this.roomsList = data;
-    })
+    });
+  }
+
+  //Http delete
+  deleteRoom() {
+    this.roomService.delete('3').subscribe((data) => {
+      this.roomsList = data;
+    });
   }
 }
 

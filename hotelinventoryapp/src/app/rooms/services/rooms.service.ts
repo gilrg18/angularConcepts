@@ -43,4 +43,9 @@ export class RoomsService {
   editRoom(room: RoomList){
     return  this.http.put<RoomList[]>(`http://localhost:3000/api/rooms/${room.roomNumber}`, room);
   }
+
+  //HTTP Delete
+  delete(id: string){
+    return this.http.delete<RoomList[]>(`http://localhost:3000/api/rooms/${id}`);
+  }
 }
