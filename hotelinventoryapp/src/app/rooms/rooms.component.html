@@ -29,9 +29,13 @@ that ngOnDestroy logic-->
   <button (click)="addRoom()">Add Room</button>
 </div>
 
-<div *ngIf="hideRooms">
+<!-- Try to avoid multiple async pipes, instead use aliases (as keyword) -->
+<div *ngIf="rooms$ | async as rooms">
   <!-- We are removing/destroying RoomsListComponent everytime we toggle hideRooms-->
- <hinv-rooms-list [rooms]="roomsList" [title]="title"
+  <!-- <hinv-rooms-list [rooms]="rooms$ | async" [title]="title" 
+  Dont use [rooms]="rooms$ | async" again cause that would be multiple subscriptions 
+  Instead use the 'as rooms' alias used in the ngIf -->
+ <hinv-rooms-list [rooms]="rooms" [title]="title"
  (selectedRoom) ="selectRoom($event)"></hinv-rooms-list>
 </div>
 

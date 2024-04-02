@@ -25,7 +25,7 @@ import { CommonModule } from '@angular/common';
 export class RoomsListComponent implements OnInit, OnChanges, OnDestroy {
   //Decorator Input to receive data
   //"Make this 'rooms' property a valid html property on 'hinv-rooms-list' html element"
-  @Input() rooms: RoomList[] = [];
+  @Input() rooms: RoomList[] | null= [];
   @Input() title: string = '';
   //You can only apply ngOnChange in components that have @Input property
   //ngOnChanges only works when you have Input properties and those properties get a new value
