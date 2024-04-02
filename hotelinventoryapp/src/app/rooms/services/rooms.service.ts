@@ -33,4 +33,9 @@ export class RoomsService {
     //"http://localhost:3000" sinde the url <- proxy didnt work lol so added manually now we have CORS issue
     return this.http.get<RoomList[]>('http://localhost:3000/api/rooms');
   }
+
+  //HTTP Put
+  addRoom(room: RoomList){
+    return this.http.post<RoomList[]>('http://localhost:3000/api/rooms', room);
+  }
 }

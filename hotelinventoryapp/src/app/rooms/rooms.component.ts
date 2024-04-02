@@ -150,9 +150,11 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
     console.log(room);
   }
 
+
   addRoom() {
+    //We will eventually replace this hardcoded data with a form
     const room: RoomList = {
-      roomNumber: '4',
+      roomNumber: '',
       roomType: 'Solo',
       amenities: 'Air conditioner, bar, hottub',
       price: 499,
@@ -165,7 +167,12 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
     //Instead of modifying the roomList directly we have tu return a new object everytime
     //we modify this instance. Very important when using STATE management
     //this.roomsList.push(room); //we should NOT do this
-    this.roomsList = [...this.roomsList, room];
+    //this.roomsList = [...this.roomsList, room];
+
+    //Calling Http Put request
+    this.roomService.addRoom(room).subscribe((data)=>{
+      this.roomsList = data;
+    })
   }
 }
 
