@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { RoomList } from '../rooms';
 import { APP_SERVICE_CONFIG } from '../../AppConfig/appconfig.service';
 import { AppConfig } from '../../AppConfig/appconfig.interface';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 //First use case: This API url will be used in multiple services so it has to be imported everywhere,
 //VALUE PROVIDERS help resolve this use case.
 @Injectable({
@@ -48,4 +48,16 @@ export class RoomsService {
   delete(id: string){
     return this.http.delete<RoomList[]>(`http://localhost:3000/api/rooms/${id}`);
   }
+
+  //HTTP REQUEST API
+  getPhotos(){
+    //we will use a fake api: https://jsonplaceholder.typicode.com/photos
+    const request = new HttpRequest('GET', `https://jsonplaceholder.typicode.com/photos`, {
+      reportProgress: true,
+
+    })
+    return this.http.request(request)
+  }
+
+
 }

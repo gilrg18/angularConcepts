@@ -14,6 +14,7 @@ import { RoomsListComponent } from './rooms-list/rooms-list.component';
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
 import { Observable } from 'rxjs';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'hinv-rooms',
@@ -32,7 +33,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
   numberOfRooms = 100;
 
   //EVENT BINDING
-  hideRooms = false;
+  hideRooms = true;
 
   selectedRoom!: RoomList;
 
@@ -104,6 +105,8 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
   //available which is pretty fast so it might be not necessary to use skipself
   constructor(@SkipSelf() private roomService: RoomsService) {}
 
+  totalBytes = 0;
+
   ngOnInit(): void {
     console.log('headerComponent: ', this.headerComponent);
     //In real world we will be retrieving this data from a service that has an api call
@@ -125,6 +128,28 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
       error: (err) => console.log(err),
     });
     this.stream.subscribe((data) => console.log(data));
+
+    //HTTP REQUEST
+    this.roomService.getPhotos().subscribe((event) => {
+      console.log('Photos: ', event);
+      switch (event.type) {
+        case HttpEventType.Sent:
+          console.log('Request has been made!');
+          break;
+        case HttpEventType.ResponseHeader:
+          console.log('Request Success!');
+          break;
+        case HttpEventType.DownloadProgress:
+          this.totalBytes += event.loaded; //how much data is loaded
+          break;
+        case HttpEventType.Response:
+          console.log(event.body);
+          break;
+
+        default:
+          break;
+      }
+    });
   }
 
   //In developer mode ull get NG0100 error, dont worry about it, worry if its in production mode
