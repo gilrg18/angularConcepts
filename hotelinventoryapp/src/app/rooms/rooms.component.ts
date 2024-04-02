@@ -102,6 +102,8 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
   //Async Pipe to handle subscriptions/unsubscriptions to avoid performance issues
   subscription !: Subscription
 
+  rooms$ = this.roomService.getRooms$;
+
   //RESOLUTION MODIFIERS - SkipSelf - skips the check from the entire
   //dependency resolution tree for this particular component.
   //Using this decorator causes Angular to look for dependencies in the parent component or beyond.
@@ -122,9 +124,10 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
     //If i wanna get the data from roomsService.getRooms() i need to subscribe to that stream
     //We call the stream getRooms$ and know we are making the rooms call in Network tab only once and not twice
     //We will use this variable (this.subscription) to hold this subscription for us
-    this.subscription = this.roomService.getRooms$.subscribe((rooms) => {
-      this.roomsList = rooms;
-    });
+    
+    // this.subscription = this.roomService.getRooms$.subscribe((rooms) => {
+    //   this.roomsList = rooms;
+    // });
 
     //If a value changes or is pushed in a database, the observer that is subscribed to the stream (Observable),
     //will receive that change or new value using the next() method

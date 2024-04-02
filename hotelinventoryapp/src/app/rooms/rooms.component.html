@@ -1,7 +1,12 @@
 <!-- <h1>Welcome to {{ hotelName }}</h1> -->
+<!-- <hinv-header></hinv-header>
 <hinv-header></hinv-header>
-<hinv-header></hinv-header>
-<hinv-header></hinv-header>
+<hinv-header></hinv-header> -->
+<!-- Using Async Pipe to unwrap the rooms$ object and display the data 
+Async Pipe also takes care of unsubscribing to your stream so you dont have to write
+that ngOnDestroy logic-->
+
+{{rooms$ | async | json}}
 <div [hidden]="hideRooms">
   Number of rooms:
   <!-- [innerText] box syntax -->
