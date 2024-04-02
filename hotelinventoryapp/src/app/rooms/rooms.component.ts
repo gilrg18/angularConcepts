@@ -150,7 +150,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
     console.log(room);
   }
 
-
+  //Http put (post a room)
   addRoom() {
     //We will eventually replace this hardcoded data with a form
     const room: RoomList = {
@@ -171,6 +171,24 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
 
     //Calling Http Put request
     this.roomService.addRoom(room).subscribe((data)=>{
+      this.roomsList = data;
+    })
+  }
+
+  //Http put (edit a room)
+  editRoom(){
+    const room: RoomList = {
+      roomNumber: '3',
+      roomType: 'EditedRoom',
+      amenities: 'Edited Room',
+      price: 499,
+      photos: 'edited.jpg',
+      checkinTime: new Date('30-Nov-2023'),
+      checkoutTime: new Date(),
+      rating: 9.115,
+    };
+
+    this.roomService.editRoom(room).subscribe((data)=>{
       this.roomsList = data;
     })
   }
