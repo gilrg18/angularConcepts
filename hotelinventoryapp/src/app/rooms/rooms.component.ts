@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 import { RoomsListComponent } from './rooms-list/rooms-list.component';
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 
 @Component({
@@ -98,6 +98,10 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
   //You should not access your services directly from a template(html), considered antipattern
   //Use private to limit this particular service to the typescript file
 
+
+  //Async Pipe to handle subscriptions/unsubscriptions to avoid performance issues
+  subscription !: Subscription
+
   //RESOLUTION MODIFIERS - SkipSelf - skips the check from the entire
   //dependency resolution tree for this particular component.
   //Using this decorator causes Angular to look for dependencies in the parent component or beyond.
@@ -117,7 +121,8 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
     //As a developer you should SUBSCRIBE to the stream to get the data
     //If i wanna get the data from roomsService.getRooms() i need to subscribe to that stream
     //We call the stream getRooms$ and know we are making the rooms call in Network tab only once and not twice
-    this.roomService.getRooms$.subscribe((rooms) => {
+    //We will use this variable (this.subscription) to hold this subscription for us
+    this.subscription = this.roomService.getRooms$.subscribe((rooms) => {
       this.roomsList = rooms;
     });
 
@@ -131,6 +136,8 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
     this.stream.subscribe((data) => console.log(data));
 
     //HTTP REQUEST
+    //The standard is that whenever you subscribe to a stream you unsubscribe from it
+    //otherwise it might cause performance issues
     this.roomService.getPhotos().subscribe((event) => {
       console.log('Photos: ', event);
       switch (event.type) {
@@ -224,6 +231,14 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
     this.roomService.delete('3').subscribe((data) => {
       this.roomsList = data;
     });
+  }
+
+  ngOnDestroy(){
+    //Whenever this component is destroyed we also want to destroy
+    //the subscription because we dont need it to be available in memory anymore
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
   }
 }
 
